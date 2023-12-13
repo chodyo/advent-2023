@@ -1,6 +1,6 @@
 # Advent of Code 2023: Go Template
 
-[![Go](https://github.com/chodyo/advent-2023-go-template/actions/workflows/go.yml/badge.svg)](https://github.com/chodyo/advent-2023-go-template/actions/workflows/go.yml)
+[![Go](https://github.com/chodyo/advent-2023/actions/workflows/go.yml/badge.svg)](https://github.com/chodyo/advent-2023/actions/workflows/go.yml)
 
 ## Setup Instructions
 
