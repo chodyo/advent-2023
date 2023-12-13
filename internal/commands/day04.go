@@ -61,7 +61,7 @@ func day04part2(lines []string) (sum int) {
 		}
 	}
 
-	return sum + 1
+	return sum
 }
 
 func parseCard(card string) (winningNums map[int]struct{}, haveNums []int) {
