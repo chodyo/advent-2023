@@ -2,6 +2,8 @@ package commands
 
 import (
 	"log"
+	"strconv"
+	"strings"
 
 	"github.com/chodyo/advent-2023/internal/input"
 )
@@ -30,20 +32,63 @@ func (c Day02Command) Process(_ []string) int {
 	return day02part1(input)
 }
 
-// day02part1 is your implementation of advent of code 2023 day 2 part 1
-func day02part1(lines []string) (sum int) {
-	// Code to get tests to pass. Replace it with your implementation!
-	if len(lines) == 5 {
-		return adventAnswers[`day 02 part 1 sample`]
+func day02part1(lines []string) int {
+	var sum int
+
+	max := map[string]int{
+		"red":   12,
+		"green": 13,
+		"blue":  14,
 	}
-	return adventAnswers[`day 02 part 1 full`]
+
+	for i, game := range lines {
+		pulls := strings.Split(game, ": ")[1]
+		valid := true
+	pulls:
+		for _, pull := range strings.Split(pulls, "; ") {
+			for _, cube := range strings.Split(pull, ", ") {
+				c := strings.Split(cube, " ")
+				amount, _ := strconv.Atoi(c[0])
+				color := c[1]
+				if max[color] < amount {
+					valid = false
+					break pulls
+				}
+			}
+		}
+		if valid {
+			sum += i + 1
+		}
+	}
+
+	return sum
 }
 
-// day02part2 is your implementation of advent of code 2023 day 2 part 2
-func day02part2(lines []string) (sum int) {
-	// Code to get tests to pass. Replace it with your implementation!
-	if len(lines) == 5 {
-		return adventAnswers[`day 02 part 2 sample`]
+func day02part2(lines []string) int {
+	var sum int
+
+	for _, game := range lines {
+		pulls := strings.Split(game, ": ")[1]
+
+		max := map[string]int{
+			"red":   0,
+			"green": 0,
+			"blue":  0,
+		}
+
+		for _, pull := range strings.Split(pulls, "; ") {
+			for _, cube := range strings.Split(pull, ", ") {
+				c := strings.Split(cube, " ")
+				amount, _ := strconv.Atoi(c[0])
+				color := c[1]
+				if max[color] < amount {
+					max[color] = amount
+				}
+			}
+		}
+
+		sum += max["red"] * max["green"] * max["blue"]
 	}
-	return adventAnswers[`day 02 part 2 full`]
+
+	return sum
 }

@@ -2,6 +2,8 @@ package commands
 
 import (
 	"log"
+	"strconv"
+	"strings"
 
 	"github.com/chodyo/advent-2023/internal/input"
 )
@@ -29,28 +31,52 @@ func (c Day01Command) Process(_ []string) int {
 	return day01part1(input)
 }
 
-// day01part1 is your implementation of advent of code 2023 day 1 part 1
-func day01part1(lines []string) (sum int) {
-	// Code to get tests to pass. Replace it with your implementation!
-	switch lines[0][0] {
-	case '1':
-		return adventAnswers[`day 01 part 1 sample 1`]
-	case 't':
-		return adventAnswers[`day 01 part 1 sample 2`]
-	default:
-		return adventAnswers[`day 01 part 1 full`]
+func day01part1(lines []string) int {
+	var sum int
+
+	for _, line := range lines {
+		leftmost := 0
+		for _, c := range line {
+			if n, err := strconv.Atoi(string(c)); err == nil {
+				leftmost = n
+				break
+			}
+		}
+
+		rightmost := 0
+		for i := len(line) - 1; i >= 0; i-- {
+			c := line[i]
+			if n, err := strconv.Atoi(string(c)); err == nil {
+				rightmost = n
+				break
+			}
+		}
+
+		sum += leftmost*10 + rightmost
 	}
+
+	return sum
 }
 
-// day01part2 is your implementation of advent of code 2023 day 1 part 2
-func day01part2(lines []string) (sum int) {
-	// Code to get tests to pass. Replace it with your implementation!
-	switch lines[0][0] {
-	case '1':
-		return adventAnswers[`day 01 part 2 sample 1`]
-	case 't':
-		return adventAnswers[`day 01 part 2 sample 2`]
-	default:
-		return adventAnswers[`day 01 part 2 full`]
+func day01part2(lines []string) int {
+	var sum int
+
+	m := map[string]string{
+		"zero": "0", "one": "1", "two": "2", "three": "3", "four": "4", "five": "5", "six": "6", "seven": "7", "eight": "8", "nine": "9",
 	}
+
+	for i := 0; i < len(lines); i++ {
+		readLine := lines[i]
+		writeLine := lines[i]
+		for word, digit := range m {
+			for idx := strings.Index(readLine, word); idx >= 0; idx = strings.Index(writeLine, word) {
+				writeLine = writeLine[:idx] + digit + writeLine[idx+1:]
+			}
+		}
+		lines[i] = writeLine
+	}
+
+	sum = day01part1(lines)
+
+	return sum
 }
