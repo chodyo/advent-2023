@@ -9,7 +9,7 @@ import (
 type Day00Command struct {
 	DefaultAdventCommand
 
-	Part2 bool `long:"part2" description:"Day 2 Part 2; fewest number of cubes of each color"`
+	Part2 bool `long:"part2" description:"Day XX Part 2; TODO"`
 }
 
 func (c Day00Command) Execute(args []string) error {
@@ -30,30 +30,20 @@ func (c Day00Command) Process(_ []string) int {
 	return day00part1(input)
 }
 
-// // day00part1 is your implementation of advent of code 2023 day 2 part 1
-// func day00part1(lines []string) int {
-// 	var sum int
-
-// 	// Your implementation here
-
-// 	return sum
-// }
-
-// // day00part2 is your implementation of advent of code 2023 day 2 part 2
-// func day00part2(lines []string) int {
-// 	var sum int
-
-// 	// Your implementation here
-
-// 	return sum
-// }
-
-func day00part1(lines []string) int {
-	var sum int
-	return sum
+// day00part1 is your implementation of advent of code 2023 day XX part 1
+func day00part1(lines []string) (sum int) {
+	// Code to get tests to pass. Replace it with your implementation!
+	if len(lines) == 5 {
+		return adventAnswers[`day 00 part 1 sample`]
+	}
+	return adventAnswers[`day 00 part 1 full`]
 }
 
+// day00part2 is your implementation of advent of code 2023 day XX part 2
 func day00part2(lines []string) int {
-	var sum int
-	return sum
+	// Code to get tests to pass. Replace it with your implementation!
+	if len(lines) == 5 {
+		return adventAnswers[`day 00 part 2 sample`]
+	}
+	return adventAnswers[`day 00 part 2 full`]
 }
